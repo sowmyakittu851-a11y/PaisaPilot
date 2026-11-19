@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PaisaPilot – Free EMI, SIP &amp; GST Calculator India</title>
+<meta name="description" content="PaisaPilot: free EMI, SIP and GST calculators for India. Fast, simple, no sign-up.">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#14151a;--muted:#667085;--accent:#1a73e8;--border:#e3e6ee;--good:#12805c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1115;--card:#181b22;--text:#f1f2f5;--muted:#98a2b3;--accent:#5b9dff;--border:#2a2f3a;--good:#4cd4a0}}
+:root[data-theme="dark"]{--bg:#0f1115;--card:#181b22;--text:#f1f2f5;--muted:#98a2b3;--accent:#5b9dff;--border:#2a2f3a;--good:#4cd4a0}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding:20px}
+h1{font-size:26px;margin:12px 0 4px}
+.sub{color:var(--muted);margin:0 0 18px}
+.tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--border);padding:5px;border-radius:14px}
+.tabs button{flex:1;border:0;background:none;color:var(--muted);padding:10px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
+.tabs button.on{background:var(--accent);color:#fff}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-top:14px}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+input{width:100%;padding:12px;font-size:17px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.chips{display:flex;gap:6px;margin-top:6px}
+.chips button{border:1px solid var(--border);background:var(--bg);color:var(--text);padding:6px 12px;border-radius:999px;cursor:pointer}
+.res{margin-top:16px;border-top:1px dashed var(--border);padding-top:14px}
+.row{display:flex;justify-content:space-between;padding:5px 0;color:var(--muted)}
+.row b{color:var(--text)}
+.big{font-size:32px;font-weight:800;color:var(--good);margin:2px 0 6px}
+.bar{height:10px;border-radius:99px;background:var(--border);overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;background:var(--accent)}
+.ad{margin-top:16px;border:1px dashed var(--border);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:13px}
+.note{font-size:12px;color:var(--muted);margin-top:18px;text-align:center}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>PaisaPilot ✈️</h1>
+<p class="sub">Your co-pilot for smart money moves. Free EMI, SIP and GST calculators for India.</p>
+
+<div class="tabs" id="tabs">
+<button class="on" data-t="emi">EMI</button>
+<button data-t="sip">SIP</button>
+<button data-t="gst">GST</button>
+</div>
+
+<div class="card" id="emi">
+<label>Loan amount (₹)</label><input id="e1" type="number" inputmode="decimal" value="1000000">
+<label>Interest rate (% per year)</label><input id="e2" type="number" inputmode="decimal" value="9">
+<label>Tenure (years)</label><input id="e3" type="number" inputmode="decimal" value="5">
+<div class="res">
+<div class="row">Monthly EMI</div><div class="big" id="eo">–</div>
+<div class="bar"><i id="eb"></i></div>
+<div class="row"><span>Principal</span><b id="ep">–</b></div>
+<div class="row"><span>Total interest</span><b id="ei">–</b></div>
+<div class="row"><span>Total payable</span><b id="et">–</b></div>
+</div>
+</div>
+
+<div class="card hide" id="sip">
+<label>Monthly investment (₹)</label><input id="s1" type="number" inputmode="decimal" value="5000">
+<label>Expected return (% per year)</label><input id="s2" type="number" inputmode="decimal" value="12">
+<label>Period (years)</label><input id="s3" type="number" inputmode="decimal" value="10">
+<div class="res">
+<div class="row">Estimated value</div><div class="big" id="so">–</div>
+<div class="bar"><i id="sb"></i></div>
+<div class="row"><span>You invest</span><b id="sp">–</b></div>
+<div class="row"><span>Estimated gain</span><b id="sg">–</b></div>
+</div>
+</div>
+
+<div class="card hide" id="gst">
+<label>Amount (₹)</label><input id="g1" type="number" inputmode="decimal" value="1000">
+<label>GST rate (%)</label><input id="g2" type="number" inputmode="decimal" value="18">
+<div class="chips" id="gc"><button data-r="5">5%</button><button data-r="18">18%</button><button data-r="40">40%</button></div>
+<label>Amount is</label>
+<div class="chips" id="gm"><button data-m="ex" class="on">Without GST</button><button data-m="in">With GST</button></div>
+<div class="res">
+<div class="row">Final price</div><div class="big" id="go">–</div>
+<div class="row"><span>Base price</span><b id="gb">–</b></div>
+<div class="row"><span>GST amount</span><b id="gt">–</b></div>
+</div>
+</div>
+
+<!-- Paste your Google AdSense code here after approval -->
+<div class="ad">Ad space</div>
+<p class="note">Results are estimates for guidance only. SIP returns are not guaranteed. Check current GST rates for your product.</p>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+function emi(){
+const P=+$("e1").value,r=+$("e2").value/1200,n=+$("e3").value*12;
+if(!(P>0&&n>0)){return}
+const m=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+const tot=m*n;
+$("eo").textContent=inr(m);$("ep").textContent=inr(P);$("ei").textContent=inr(tot-P);$("et").textContent=inr(tot);
+$("eb").style.width=(P/tot*100)+"%";
+}
+function sip(){
+const P=+$("s1").value,i=+$("s2").value/1200,n=+$("s3").value*12;
+if(!(P>0&&n>0)){return}
+const fv=i===0?P*n:P*((Math.pow(1+i,n)-1)/i)*(1+i);
+const inv=P*n;
+$("so").textContent=inr(fv);$("sp").textContent=inr(inv);$("sg").textContent=inr(fv-inv);
+$("sb").style.width=(inv/fv*100)+"%";
+}
+let mode="ex";
+function gst(){
+const a=+$("g1").value,r=+$("g2").value;
+if(!(a>=0)){return}
+let base,tax;
+if(mode==="ex"){base=a;tax=a*r/100}else{base=a*100/(100+r);tax=a-base}
+$("go").textContent=inr(base+tax);$("gb").textContent="₹"+base.toFixed(2);$("gt").textContent="₹"+tax.toFixed(2);
+}
+["e1","e2","e3"].forEach(i=>$(i).addEventListener("input",emi));
+["s1","s2","s3"].forEach(i=>$(i).addEventListener("input",sip));
+["g1","g2"].forEach(i=>$(i).addEventListener("input",gst));
+$("gc").addEventListener("click",e=>{if(e.target.dataset.r){$("g2").value=e.target.dataset.r;gst()}});
+$("gm").addEventListener("click",e=>{if(e.target.dataset.m){mode=e.target.dataset.m;[...$("gm").children].forEach(b=>b.classList.toggle("on",b===e.target));gst()}});
+$("tabs").addEventListener("click",e=>{const t=e.target.dataset.t;if(!t)return;
+[...$("tabs").children].forEach(b=>b.classList.toggle("on",b===e.target));
+["emi","sip","gst"].forEach(x=>$(x).classList.toggle("hide",x!==t));});
+emi();sip();gst();
+</script>
+</body>
+</html>
